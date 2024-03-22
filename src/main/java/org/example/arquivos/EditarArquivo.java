@@ -1,10 +1,17 @@
 package org.example.arquivos;
 
 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
+
 
 public class EditarArquivo {
 
+    private static final Logger logger
+            = LoggerFactory.getLogger(EditarArquivo.class);
     private static String PASTA_PADRAO_ARQUIVOS = "./saidaDeArquivos/";
 
     private String nomeDeArquivo;
@@ -35,8 +42,9 @@ public class EditarArquivo {
                 conteudo.append(line + "\n");
             }
             leitorBf.close();
+            logger.info("concluido leitura de arquivo.");
         } catch (NullPointerException | FileNotFoundException e) {
-            System.err.println(e.getMessage() + "\nFoi tentado ler um arquivo inexistente");
+            logger.warn("Foi tentado ler um arquivo inexistente");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -54,6 +62,8 @@ public class EditarArquivo {
         novoConteudo = conteudoDeArquivo + novoConteudo;
         this.escrever(novoConteudo);
 
+        logger.info("arquivo editado com sucesso!");
+
     }
 
     /**
@@ -65,6 +75,8 @@ public class EditarArquivo {
             BufferedWriter leitorBf = new BufferedWriter(new FileWriter(localDeArquivo));
             leitorBf.write(conteudo);
             leitorBf.close();
+
+            logger.info("arquivo escrito com sucesso !");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

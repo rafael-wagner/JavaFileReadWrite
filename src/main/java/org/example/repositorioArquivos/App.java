@@ -1,7 +1,7 @@
-package org.example.arquivos;
+package org.example.repositorioArquivos;
 
-import org.example.arquivos.EditarArquivo;
 
+import org.example.repositorioArquivos.controller.EditarArquivo;
 
 /**
  * Hello world!
